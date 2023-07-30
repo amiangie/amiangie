@@ -15,7 +15,7 @@
   html {
     scroll-behavior: smooth;
     font-family: 'Jost', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     background: url('public/amiangie-bg.jpg') center center no-repeat fixed;
     background-size: cover;
 
@@ -23,7 +23,7 @@
     --font-size-l: 2.5rem;
     --font-size-m: 1.68rem; 
     --font-size-s: 1.5rem;
-    --indent-nice: 69px;
+    --indent-nice: 34px;
   }
 
   body {
@@ -47,5 +47,12 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
+  }
+
+  @media only screen and (min-width: 800px) {
+    html {
+      font-size: 16px;
+      --indent-nice: 69px;
+    }
   }
 </style>

@@ -49,6 +49,7 @@ const { data: contact } = await useAsyncData('contact', () => queryContent('/con
 <style lang="scss">
   .PageHeader {
     position: fixed;
+    top: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -74,22 +75,8 @@ const { data: contact } = await useAsyncData('contact', () => queryContent('/con
     text-decoration: none;
   }
 
-  .PageNav {
-    display: flex;
-
-    &__link {
-      margin-right: 1ch;
-
-      &:not(:last-child):after {
-        content: '/';
-        margin-left: 1ch;
-      }
-    }
-  }
-
   .Home {
     display: grid;
-    max-width: 100%;
     min-height: 100vh;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -97,19 +84,18 @@ const { data: contact } = await useAsyncData('contact', () => queryContent('/con
     grid-template-areas: 
       ". . ."
       "main main main"
-      ". . note";
+      ". note note";
 
       &__hero {
         grid-area: main;
         align-self: center;
-        font-size: var(--font-size-l);
-        text-align: center;
+        font-size: var(--font-size-s);
         line-height: 1;
 
         span {
           display: block;
           text-transform: uppercase;
-          font-size: 8vw;
+          font-size: 12vw;
         }
       }
 
@@ -118,7 +104,43 @@ const { data: contact } = await useAsyncData('contact', () => queryContent('/con
         align-self: end;
         justify-self: end;
         text-align: right;
-        max-width: 30ch;
       }
   }
+
+  @media only screen and (min-width: 800px) {
+    .PageNav {
+      display: flex;
+
+      &__link {
+        margin-right: 1ch;
+
+        &:not(:last-child):after {
+          content: '/';
+          margin-left: 1ch;
+        }
+      }
+    }
+
+    .Home {
+      display: grid;
+      max-width: 100%;
+      grid-template-areas: 
+        ". . ."
+        "main main main"
+        ". . note";
+
+        &__hero {
+          font-size: var(--font-size-l);
+          text-align: center;
+
+          span {
+            font-size: 8vw;
+          }
+        }
+
+        &__note {
+          max-width: 30ch;
+        }
+      }
+    }
 </style>
