@@ -29,7 +29,7 @@
       <ContentRenderer :value="portfolio" />
     </section>
     <section class="PageSection Art" id="Art">
-      <img src="amiangie-art.jpg" alt="A painting in style of Leyendecker, featuring players from OG Esports team, four of whom are arranged in front of Aegis, and the oldest one is slumping in a chair, daydreaming about their future wins.">
+      <img src="public/amiangie-art.jpg" alt="A painting in style of Leyendecker, featuring players from OG Esports team, four of whom are arranged in front of Aegis, and the oldest one is slumping in a chair, daydreaming about their future wins.">
       <p>Art portfolio is in the works, but here's a sneak peek. Commissions open!</p>
     </section>
     <section class="PageSection Contact" id="Contact">
@@ -137,6 +137,7 @@
 
   .Contact {
     font-size: var(--font-size-l);
+    word-break: break-all;
 
     li {
       margin-bottom: 1.5em;
