@@ -89,13 +89,13 @@
       &__hero {
         grid-area: main;
         align-self: center;
-        font-size: var(--font-size-s);
+        font-size: var(--font-size-m);
         line-height: 1;
 
         span {
           display: block;
           text-transform: uppercase;
-          font-size: 12vw;
+          font-size: calc(1rem + 8vw);
         }
       }
 
@@ -171,25 +171,7 @@
       }
     }
 
-    .Home {
-      grid-template-areas: 
-        ". . ."
-        "main main main"
-        ". . note";
-
-      &__hero {
-        font-size: var(--font-size-l);
-        text-align: center;
-
-        span {
-          font-size: 8vw;
-        }
-      }
-
-      &__note {
-        max-width: 30ch;
-      }
-    }
+    
   }
 
   @media only screen and (min-width: 1280px) {
@@ -204,6 +186,26 @@
           display: inline;
           margin-left: -5.5ch;
         }
+      }
+    }
+
+    .Home {
+      grid-template-areas: 
+        ". . ."
+        "main main main"
+        ". . note";
+
+      &__hero {
+        font-size: var(--font-size-l);
+        text-align: center;
+
+        span {
+          font-size: calc(1rem + 6vw);
+        }
+      }
+
+      &__note {
+        max-width: 30ch;
       }
     }
   }
