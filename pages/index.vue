@@ -15,7 +15,7 @@
     </nav>
   </header>
   <main class="PageMain">
-    <section class="PageSection Home" id="Home">
+    <section class="Home" id="Home">
       <h1 class="Home__hero">
         Hi! I'm Angie, and I'm a
         <span>front-end developer</span>
@@ -67,8 +67,9 @@ const { data: contact } = await useAsyncData('contact', () => queryContent('/con
     display: flex;
     flex-direction: column;
     justify-content: center;
-    max-width: 860px;
+    max-width: 750px;
     margin: 0 auto;
+    padding: 150px 0;
   }
 
   .Pseudologo {
@@ -107,6 +108,31 @@ const { data: contact } = await useAsyncData('contact', () => queryContent('/con
       }
   }
 
+  .About {
+    p:first-child {
+      font-size: 1.6em;
+      margin-bottom: 3.5em;
+
+      &:before {
+        content: 'TL;DR: ';
+        display: block;
+        margin: 0;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 1280px) {
+    .About {
+      p:first-child {
+        &:before {
+          content: 'TL;DR: ';
+          display: inline;
+          margin-left: -5.5ch;
+        }
+      }
+    }
+  }
+
   @media only screen and (min-width: 800px) {
     .PageNav {
       display: flex;
@@ -122,8 +148,6 @@ const { data: contact } = await useAsyncData('contact', () => queryContent('/con
     }
 
     .Home {
-      display: grid;
-      max-width: 100%;
       grid-template-areas: 
         ". . ."
         "main main main"
