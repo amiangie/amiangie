@@ -4,7 +4,6 @@
   </div>
 </template>
 
-
 <style lang="scss">
   @import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
 
@@ -15,8 +14,8 @@
   html {
     scroll-behavior: smooth;
     font-family: 'Jost', sans-serif;
-    font-size: 14px;
-    background: url('public/amiangie-bg.jpg') center center no-repeat fixed;
+    font-size: 12px;
+    background: url('/amiangie-bg.jpg') center center no-repeat fixed;
     background-size: cover;
 
     --color-text: #f2bd38;
@@ -29,7 +28,7 @@
   body {
     color: var(--color-text);
     margin: 0;
-    font-size: var(--font-size-s);
+    font-size: var(--font-size-m);
     line-height: 1.5;
   }
 
@@ -47,6 +46,16 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
+  }
+
+  h2 {
+    font-size: var(--font-size-m);
+    text-align: center;
+    margin-top: 5.5em;
+
+    &:first-child {
+      margin-top: 0;
+    }
   }
 
   @media only screen and (min-width: 800px) {

@@ -15,7 +15,7 @@
     </nav>
   </header>
   <main class="PageMain">
-    <section class="Home" id="Home">
+    <section class="Home js-section" id="Home">
       <h1 class="Home__hero">
         Hi! I'm Angie, and I'm a
         <span>front-end developer</span>
@@ -24,26 +24,59 @@
         I <NuxtLink :to="{path: '/', hash: '#Portfolio'}">create</NuxtLink> beautiful and accessible websites, <a href="https://dev.to/amiangie" target="_blank">write</a> about web, and paint things.
       </p>
     </section>
-    <div class="">
-    <section class="PageSection About" id="About">
+    <section class="PageSection About js-section" id="About">
       <ContentRenderer :value="about" />
     </section>
-    <section class="PageSection HomPortfolioe" id="Portfolio">
+    <section class="PageSection Portfolio js-section" id="Portfolio">
       <ContentRenderer :value="portfolio" />
     </section>
-    <section class="PageSection Contact" id="Contact">
+    <section class="PageSection Contact js-section" id="Contact">
       <ContentRenderer :value="contact" />
     </section>
-    </div>
   </main>
 </template>
 
 <script setup>
-const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation());
+import { onMounted } from 'vue'
 
+const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation());
 const { data: about } = await useAsyncData('about', () => queryContent('/about').findOne());
 const { data: portfolio } = await useAsyncData('portfolio', () => queryContent('/portfolio').findOne());
 const { data: contact } = await useAsyncData('contact', () => queryContent('/contact').findOne());
+
+const router = useRouter();
+
+const observeSections = (() => {
+  try {
+    sectionObserver.disconnect()
+  } catch (error) {};
+
+  const options = {
+    // rootMargin: '0px 0px',
+    // threshold: 0.4,
+    // trackVisibility: true
+  };
+
+  let sectionObserver = new IntersectionObserver(sectionObserverHandler, options);
+
+  const sections = document.querySelectorAll('.js-section');
+  sections.forEach(section => {
+    sectionObserver.observe(section);
+  })
+});
+
+const sectionObserverHandler = ((entries) => {
+  for (const entry of entries) {
+    if (entry.isIntersecting) {
+        const sectionId = entry.target.id;
+        router.replace({ path: '/', hash: `#${sectionId}` });
+    }
+  }
+})
+
+onMounted(() => {
+  observeSections();
+})
 </script>
 
 <style lang="scss">
@@ -53,6 +86,7 @@ const { data: contact } = await useAsyncData('contact', () => queryContent('/con
     width: 100%;
     display: flex;
     justify-content: space-between;
+    background: black;
     font-size: var(--font-size-s);
     padding: var(--indent-nice);
   }
@@ -105,12 +139,14 @@ const { data: contact } = await useAsyncData('contact', () => queryContent('/con
         align-self: end;
         justify-self: end;
         text-align: right;
+        margin: 0;
+        padding-bottom: var(--indent-nice);
       }
   }
 
   .About {
     p:first-child {
-      font-size: 1.6em;
+      font-size: var(--font-size-l);
       margin-bottom: 3.5em;
 
       &:before {
@@ -118,6 +154,29 @@ const { data: contact } = await useAsyncData('contact', () => queryContent('/con
         display: block;
         margin: 0;
       }
+    }
+  }
+
+  .Portfolio {
+    a {
+      font-size: var(--font-size-l);
+
+      &:after {
+        content: "";
+        display: block;
+      }
+    }
+
+    li {
+      margin-top: 2em;
+    }
+  }
+
+  .Contact {
+    font-size: var(--font-size-l);
+
+    li {
+      margin-bottom: 1.5em;
     }
   }
 
@@ -134,6 +193,10 @@ const { data: contact } = await useAsyncData('contact', () => queryContent('/con
   }
 
   @media only screen and (min-width: 800px) {
+    .PageHeader {
+      background: transparent;
+    }
+
     .PageNav {
       display: flex;
 
