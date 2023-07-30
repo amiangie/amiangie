@@ -18,5 +18,8 @@ export default defineNuxtConfig({
     markdown: {
       anchorLinks: false,
     }
-  }
+  },
+  css: [
+    '@/assets/main.scss'
+  ]
 })

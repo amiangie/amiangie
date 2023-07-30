@@ -21,7 +21,7 @@
         <span>front-end developer</span>
       </h1>
       <p class="Home__note">
-        I <NuxtLink :to="{path: '/', hash: '#Portfolio'}">create</NuxtLink> beautiful and accessible websites, <a href="https://dev.to/amiangie" target="_blank">write</a> about web, and paint things.
+        I <a href="#Portfolio">create</a> beautiful and accessible websites, <a href="#random-bits">write</a> about web, and <a href="#Art">paint</a> things.
       </p>
     </section>
     <section class="PageSection About js-section" id="About">
@@ -30,6 +30,10 @@
     <section class="PageSection Portfolio js-section" id="Portfolio">
       <ContentRenderer :value="portfolio" />
     </section>
+    <section class="PageSection Art js-section" id="Art">
+      <img src="amiangie-art.jpg" alt="A painting in style of Leyendecker, featuring players from OG Esports team, four of whom are arranged in front of Aegis, and the oldest one is slumping in a chair, daydreaming about their future wins.">
+      <p>Art portfolio is in the works, but here's a sneak peek. Commissions open!</p>
+    </section>
     <section class="PageSection Contact js-section" id="Contact">
       <ContentRenderer :value="contact" />
     </section>
@@ -37,46 +41,10 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
-
-const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation());
-const { data: about } = await useAsyncData('about', () => queryContent('/about').findOne());
-const { data: portfolio } = await useAsyncData('portfolio', () => queryContent('/portfolio').findOne());
-const { data: contact } = await useAsyncData('contact', () => queryContent('/contact').findOne());
-
-const router = useRouter();
-
-const observeSections = (() => {
-  try {
-    sectionObserver.disconnect()
-  } catch (error) {};
-
-  const options = {
-    // rootMargin: '0px 0px',
-    // threshold: 0.4,
-    // trackVisibility: true
-  };
-
-  let sectionObserver = new IntersectionObserver(sectionObserverHandler, options);
-
-  const sections = document.querySelectorAll('.js-section');
-  sections.forEach(section => {
-    sectionObserver.observe(section);
-  })
-});
-
-const sectionObserverHandler = ((entries) => {
-  for (const entry of entries) {
-    if (entry.isIntersecting) {
-        const sectionId = entry.target.id;
-        router.replace({ path: '/', hash: `#${sectionId}` });
-    }
-  }
-})
-
-onMounted(() => {
-  observeSections();
-})
+  const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation());
+  const { data: about } = await useAsyncData('about', () => queryContent('/about').findOne());
+  const { data: portfolio } = await useAsyncData('portfolio', () => queryContent('/portfolio').findOne());
+  const { data: contact } = await useAsyncData('contact', () => queryContent('/contact').findOne());
 </script>
 
 <style lang="scss">
@@ -98,9 +66,6 @@ onMounted(() => {
   }
 
   .PageSection {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     max-width: 750px;
     margin: 0 auto;
     padding: 150px 0;
@@ -180,32 +145,28 @@ onMounted(() => {
     }
   }
 
-  @media only screen and (min-width: 1280px) {
-    .About {
-      p:first-child {
-        &:before {
-          content: 'TL;DR: ';
-          display: inline;
-          margin-left: -5.5ch;
-        }
-      }
-    }
+  .Art {
+    font-size: 0.75em;
   }
 
   @media only screen and (min-width: 800px) {
-    .PageHeader {
-      background: transparent;
-    }
-
     .PageNav {
       display: flex;
 
       &__link {
         margin-right: 1ch;
 
-        &:not(:last-child):after {
+        &:after {
           content: '/';
           margin-left: 1ch;
+        }
+
+        &:last-child {
+          margin-right: 0;
+
+          &:after {
+            display: none;
+          }
         }
       }
     }
@@ -216,18 +177,34 @@ onMounted(() => {
         "main main main"
         ". . note";
 
-        &__hero {
-          font-size: var(--font-size-l);
-          text-align: center;
+      &__hero {
+        font-size: var(--font-size-l);
+        text-align: center;
 
-          span {
-            font-size: 8vw;
-          }
+        span {
+          font-size: 8vw;
         }
+      }
 
-        &__note {
-          max-width: 30ch;
+      &__note {
+        max-width: 30ch;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 1280px) {
+    .PageHeader {
+      background: transparent;
+    }
+
+    .About {
+      p:first-child {
+        &:before {
+          content: 'TL;DR: ';
+          display: inline;
+          margin-left: -5.5ch;
         }
       }
     }
+  }
 </style>
