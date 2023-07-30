@@ -3,7 +3,6 @@
     <NuxtLink :to="{path: '/', hash: '#Home'}" class="Pseudologo">
       Angie's Homepage
     </NuxtLink>
-
     <nav>
       <ul class="PageNav">
         <li v-for="navItem in navigation" :key="navItem.title" class="PageNav__link">
@@ -15,26 +14,25 @@
     </nav>
   </header>
   <main class="PageMain">
-    <section class="Home js-section" id="Home">
+    <section class="Home" id="Home">
       <h1 class="Home__hero">
-        Hi! I'm Angie, and I'm a
-        <span>front-end developer</span>
+        Hi! I'm Angie, and I'm a <span>front-end developer</span>
       </h1>
       <p class="Home__note">
-        I <a href="#Portfolio">create</a> beautiful and accessible websites, <a href="#random-bits">write</a> about web, and <a href="#Art">paint</a> things.
+        I <a href="#Portfolio">create</a> beautiful and accessible websites, <a href="https://dev.to/amiangie" target="_blank">write</a> about web, and <a href="#Art">paint</a> things.
       </p>
     </section>
-    <section class="PageSection About js-section" id="About">
+    <section class="PageSection About" id="About">
       <ContentRenderer :value="about" />
     </section>
-    <section class="PageSection Portfolio js-section" id="Portfolio">
+    <section class="PageSection Portfolio" id="Portfolio">
       <ContentRenderer :value="portfolio" />
     </section>
-    <section class="PageSection Art js-section" id="Art">
+    <section class="PageSection Art" id="Art">
       <img src="amiangie-art.jpg" alt="A painting in style of Leyendecker, featuring players from OG Esports team, four of whom are arranged in front of Aegis, and the oldest one is slumping in a chair, daydreaming about their future wins.">
       <p>Art portfolio is in the works, but here's a sneak peek. Commissions open!</p>
     </section>
-    <section class="PageSection Contact js-section" id="Contact">
+    <section class="PageSection Contact" id="Contact">
       <ContentRenderer :value="contact" />
     </section>
   </main>
@@ -127,7 +125,7 @@
       font-size: var(--font-size-l);
 
       &:after {
-        content: "";
+        content: '';
         display: block;
       }
     }
@@ -170,8 +168,6 @@
         }
       }
     }
-
-    
   }
 
   @media only screen and (min-width: 1280px) {
@@ -182,7 +178,6 @@
     .About {
       p:first-child {
         &:before {
-          content: 'TL;DR: ';
           display: inline;
           margin-left: -5.5ch;
         }
